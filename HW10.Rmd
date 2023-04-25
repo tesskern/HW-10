@@ -1,0 +1,45 @@
+---
+title: "HW 10"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+accident <- read.csv('https://raw.githubusercontent.com/yumouqiu/DS202-Spring2023/main/Practice/data/fars2016/accident.csv')
+
+person <- read.csv('https://raw.githubusercontent.com/yumouqiu/DS202-Spring2023/main/Practice/data/fars2016/person.csv')
+
+vehicle <- read.csv('https://raw.githubusercontent.com/yumouqiu/DS202-Spring2023/main/Practice/data/fars2016/vehicle.csv')
+```
+1. are there some days of the week where more accidents happen than on others (use variable DAY_WEEK)?
+```{r}
+accident
+#counts number of accidents on each day of the week
+day_counts <- table(accident$DAY_WEEK)
+most <- names(day_counts)[which.max(day_counts)]
+most
+```
+The seventh day of the week has the most accidents
+
+2. what time of the day do accidents happen (use variable HOUR)?
+```{r}
+time_counts <- table(accident$HOUR)
+timeofday <- names(time_counts)[which.max(time_counts)]
+timeofday
+```
+The 18th hour, aka 6 pm
+
+3. what is the number of accidents with at least one drunk driver (use variable DRUNK_DR)?
+```{r}
+drunkdriver <- sum(accident$DRUNK_DR >= 1)
+drunkdriver
+```
+8,720 accidents
+
+4. Connect to the person table. Identify drivers (PER_TYP == 1, see fars manual ) and subset on them.
+
+5. Join accident and driver table (work out which variable(s) to use)
+6. Tally the number of accidents by day of the week (DAY_WEEK), hour of the day (HOUR) and gender (SEX). Visualize the results!
