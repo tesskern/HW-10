@@ -41,6 +41,7 @@ drunkdriver
 
 4. Connect to the person table. Identify drivers (PER_TYP == 1, see fars manual ) and subset on them.
 ```{r}
+library(dplyr)
 person <- read.csv('https://raw.githubusercontent.com/yumouqiu/DS202-Spring2023/main/Practice/data/fars2016/person.csv')
 person = person %>% filter(PER_TYP == 1)
 ```
@@ -58,6 +59,7 @@ acc.person.tally = acc.person %>% group_by(DAY_WEEK, HOUR, SEX) %>%
   summarise(n = n())
 ```
 ```{r}
+library(ggplot2)
 acc.person.tally = na.omit(acc.person.tally)
 acc.person.tally = acc.person.tally %>% filter(HOUR < 25)
 acc.person.tally %>% ggplot(aes(x = HOUR, y = n, color = SEX)) +
