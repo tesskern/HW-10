@@ -2,7 +2,7 @@
 title: "HW 10"
 output: html_document
 ---
-
+Group names: ess Kern, Leah Greiner, Maheeka D
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -40,6 +40,28 @@ drunkdriver
 8,720 accidents
 
 4. Connect to the person table. Identify drivers (PER_TYP == 1, see fars manual ) and subset on them.
+```{r}
+person <- read.csv('https://raw.githubusercontent.com/yumouqiu/DS202-Spring2023/main/Practice/data/fars2016/person.csv')
+person = person %>% filter(PER_TYP == 1)
+```
+
 
 5. Join accident and driver table (work out which variable(s) to use)
+```{r}
+person = person %>% filter(SEX == 1 | SEX == 2)
+acc.person = left_join(accident, person, by = c("ST_CASE", "HOUR", "MINUTE", "DAY", "MONTH"))
+```
+
 6. Tally the number of accidents by day of the week (DAY_WEEK), hour of the day (HOUR) and gender (SEX). Visualize the results!
+```{r}
+acc.person.tally = acc.person %>% group_by(DAY_WEEK, HOUR, SEX) %>% 
+  summarise(n = n())
+```
+```{r}
+acc.person.tally = na.omit(acc.person.tally)
+acc.person.tally = acc.person.tally %>% filter(HOUR < 25)
+acc.person.tally %>% ggplot(aes(x = HOUR, y = n, color = SEX)) +
+  geom_point() + 
+  facet_wrap(~DAY_WEEK)
+```
+
