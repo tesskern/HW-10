@@ -16,7 +16,7 @@ vehicle <- read.csv('https://raw.githubusercontent.com/yumouqiu/DS202-Spring2023
 ```
 1. are there some days of the week where more accidents happen than on others (use variable DAY_WEEK)?
 ```{r}
-accident
+#accident
 #counts number of accidents on each day of the week
 day_counts <- table(accident$DAY_WEEK)
 most <- names(day_counts)[which.max(day_counts)]
