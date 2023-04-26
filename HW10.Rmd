@@ -2,7 +2,7 @@
 title: "HW 10"
 output: html_document
 ---
-Group names: ess Kern, Leah Greiner, Maheeka D
+Group names: Tess Kern, Leah Greiner, Maheeka D
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
